@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "OAB",
+    "slug": "oab",
+    "description": "OAB App",
+    "primaryColor": "#CB0C9F",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo.png",
+    "splash": {
+      "resizeMode": "cover",
+      "backgroundColor": "#0D73B1"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/2983179f-b0a6-4302-8199-af06f73d704e"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#CB0C9F"
+      },
+      "package": "com.tanvirfaysal11.rnsoftuikitfree"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-localization"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2983179f-b0a6-4302-8199-af06f73d704e"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
+  }
+}
