@@ -14,7 +14,7 @@ export default function Login() {
     const [showPass, setShowPass] = useState(false)
 
     const handleUserLogin = () => {
-        nav.navigate(ScreenNames.COMMON_STACK as never)
+        nav.navigate(ScreenNames.OAB_MENU as never)
     }
 
     // const currentServer = () => {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Articles, Components, Home, Profile, Register, Pro } from '../screens';
 import { useScreenOptions, useTranslation } from '../hooks';
+import Dashboard from '../screens/MainScreen/Dashboard';
+import { ScreenNames } from '../constants/types/screen.data';
 
 const Stack = createStackNavigator();
 
@@ -13,34 +14,11 @@ export default () => {
   return (
     <Stack.Navigator screenOptions={screenOptions.stack}>
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ title: t('navigation.home') }}
+        name={ScreenNames.DASHBOARD}
+        component={Dashboard}
+        options={{ title: "Dashboard" }}
       />
 
-      <Stack.Screen
-        name="Components"
-        component={Components}
-        options={screenOptions.components}
-      />
-
-      <Stack.Screen
-        name="Articles"
-        component={Articles}
-        options={{ title: t('navigation.articles') }}
-      />
-
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="Register"
-        component={Register}
-        options={{ headerShown: false }}
-      />
     </Stack.Navigator>
   );
 };

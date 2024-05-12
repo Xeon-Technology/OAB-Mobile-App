@@ -2,22 +2,19 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { ScreenNames } from '../constants/types/screen.data';
-import Dashboard from '../screens/MainScreen/Dashboard';
 import { useScreenOptions } from '../hooks';
+import RetailSales from '../screens/MainScreen/RetailSales';
 const Stack = createStackNavigator();
 
 const CommonStack = () => {
-    const nav = useNavigation();
-    const screenOptions = useScreenOptions();
 
     return (
-        <Stack.Navigator screenOptions={screenOptions.stack}>
+        <Stack.Navigator>
             <Stack.Screen
-                name={ScreenNames.DASHBOARD}
-                component={Dashboard}
+                name={ScreenNames.RETAIL_SALES}
+                component={RetailSales}
                 options={{
-                    title: 'Dashboard',
-                    headerShown: true,
+                    title: 'Retail Sales'
                 }}
             />
         </Stack.Navigator>

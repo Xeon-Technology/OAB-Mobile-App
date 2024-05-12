@@ -14,6 +14,8 @@ import {
 import { Block, Text, Button, Image } from '../components';
 import { useTheme, useTranslation } from '../hooks';
 import CommonStack from './CommonStack';
+import { ScreenNames } from '../constants/types/screen.data';
+import Screens from './Screens';
 
 const Drawer = createDrawerNavigator();
 
@@ -58,7 +60,7 @@ const ScreensStack = () => {
         },
       ])}>
       {/*  */}
-      <CommonStack />
+      <Screens />
     </Animated.View>
   );
 };
@@ -69,25 +71,28 @@ const DrawerContent = (
 ) => {
   const { navigation } = props;
   const { t } = useTranslation();
-  const [active, setActive] = useState('SAPHome');
+  const [active, setActive] = useState('Home');
   const { assets, colors, gradients, sizes } = useTheme();
   const labelColor = colors.text;
 
   const handleNavigation = useCallback(
-    (to: string) => {
+    (to: any) => {
       setActive(to);
-      navigation.navigate(to);
+      navigation.navigate({
+        name: ScreenNames.COMMON_STACK as never,
+      } as never,
+      );
     },
     [navigation, setActive],
   );
 
+  const handleWebLink = useCallback((url: string) => Linking.openURL(url), []);
 
-  const handleWebLink = useCallback((url: any) => Linking.openURL(url), []);
-
+  // screen list for Drawer menu
   const screens = [
-    { name: t('screens.home'), to: 'Home', icon: assets.home },
+    { name: ScreenNames.DASHBOARD, to: 'Home', icon: assets.home },
     { name: t('screens.components'), to: 'Components', icon: assets.components },
-    { name: t('screens.articles'), to: 'Articles', icon: assets.document },
+    { name: ScreenNames.RETAIL_SALES, to: 'RetailSales', icon: assets.document },
     { name: t('screens.rental'), to: 'Pro', icon: assets.rental },
     { name: t('screens.profile'), to: 'Profile', icon: assets.profile },
     { name: t('screens.settings'), to: 'Pro', icon: assets.settings },
@@ -101,8 +106,7 @@ const DrawerContent = (
       scrollEnabled
       removeClippedSubviews
       renderToHardwareTextureAndroid
-      contentContainerStyle={{ paddingBottom: sizes.padding }}
-    >
+      contentContainerStyle={{ paddingBottom: sizes.padding }}>
       <Block paddingHorizontal={sizes.padding}>
         <Block flex={0} row align="center" marginBottom={sizes.l}>
           <Image
