@@ -1,17 +1,19 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert, Animated, Linking, StyleSheet } from 'react-native';
+import {
+  Animated,
+  Linking,
+  StyleSheet,
+} from 'react-native';
 
 import {
   useDrawerStatus,
   createDrawerNavigator,
-  DrawerContentComponentProps,
-  DrawerContentOptions,
   DrawerContentScrollView,
 } from '@react-navigation/drawer';
 
-import Screens from './Screens';
-import { Block, Text, Switch, Button, Image } from '../components';
-import { useData, useTheme, useTranslation } from '../hooks';
+import { Block, Text, Button, Image } from '../components';
+import { useTheme, useTranslation } from '../hooks';
+import CommonStack from './CommonStack';
 
 const Drawer = createDrawerNavigator();
 
@@ -56,19 +58,18 @@ const ScreensStack = () => {
         },
       ])}>
       {/*  */}
-      <Screens />
+      <CommonStack />
     </Animated.View>
   );
 };
 
 /* custom drawer menu */
 const DrawerContent = (
-  props: DrawerContentComponentProps<DrawerContentOptions>,
+  props: any,
 ) => {
   const { navigation } = props;
   const { t } = useTranslation();
-  const { isDark, handleIsDark } = useData();
-  const [active, setActive] = useState('Home');
+  const [active, setActive] = useState('SAPHome');
   const { assets, colors, gradients, sizes } = useTheme();
   const labelColor = colors.text;
 
@@ -80,9 +81,9 @@ const DrawerContent = (
     [navigation, setActive],
   );
 
-  const handleWebLink = useCallback((url: string) => Linking.openURL(url), []);
 
-  // screen list for Drawer menu
+  const handleWebLink = useCallback((url: any) => Linking.openURL(url), []);
+
   const screens = [
     { name: t('screens.home'), to: 'Home', icon: assets.home },
     { name: t('screens.components'), to: 'Components', icon: assets.components },
@@ -100,7 +101,8 @@ const DrawerContent = (
       scrollEnabled
       removeClippedSubviews
       renderToHardwareTextureAndroid
-      contentContainerStyle={{ paddingBottom: sizes.padding }}>
+      contentContainerStyle={{ paddingBottom: sizes.padding }}
+    >
       <Block paddingHorizontal={sizes.padding}>
         <Block flex={0} row align="center" marginBottom={sizes.l}>
           <Image
@@ -226,3 +228,17 @@ export default () => {
     </Block>
   );
 };
+
+const styles = StyleSheet.create({
+  menuItemStyle: {
+    marginVertical: 2,
+    alignContent: 'flex-start',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    paddingVertical: 5,
+    borderBottomRightRadius: 5,
+    backgroundColor: '#fff',
+    paddingLeft: '8%',
+    // marginLeft: - (height * 0.04)
+  },
+});

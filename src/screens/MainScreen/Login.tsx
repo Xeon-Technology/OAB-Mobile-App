@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { TextInput } from 'react-native-paper';
 import { Button, Text } from '../../components';
 import { useTheme } from '../../hooks';
+import { ScreenNames } from '../../constants/types/screen.data';
 
 
 export default function Login() {
@@ -13,7 +14,7 @@ export default function Login() {
     const [showPass, setShowPass] = useState(false)
 
     const handleUserLogin = () => {
-
+        nav.navigate(ScreenNames.COMMON_STACK as never)
     }
 
     // const currentServer = () => {

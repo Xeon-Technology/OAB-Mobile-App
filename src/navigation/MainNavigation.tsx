@@ -3,8 +3,9 @@ import { useTheme } from "../hooks";
 import { Block } from "../components";
 import { ScreenNames } from "../constants/types/screen.data";
 import CommonStack from "./CommonStack";
-import SplashComp from "../screens/MainStack/SplashScreen";
-import Login from "../screens/MainStack/Login";
+import SplashComp from "../screens/MainScreen/SplashScreen";
+import Login from "../screens/MainScreen/Login";
+import SAPMenu from "./SAPMenu";
 
 
 export default function MainNavigation() {
@@ -16,7 +17,6 @@ export default function MainNavigation() {
             <Stack.Navigator initialRouteName={ScreenNames.SPLASH_SCREEN}>
                 <Stack.Screen name={ScreenNames.SPLASH_SCREEN} options={{ headerShown: false, }} component={SplashComp} />
                 <Stack.Screen name={ScreenNames.LOGIN} options={{ headerShown: false, }} component={Login} />
-                {/* <Stack.Screen name={ScreenNames.SIGN_UP} options={{ headerShown: false, }} component={SignUp} /> */}
                 <Stack.Screen name={ScreenNames.COMMON_STACK} options={{ headerShown: false, }} component={CommonStack} />
             </Stack.Navigator>
         </Block>
