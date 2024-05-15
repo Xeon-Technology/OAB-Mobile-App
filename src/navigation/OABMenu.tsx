@@ -71,13 +71,14 @@ const DrawerContent = (
 ) => {
   const { navigation } = props;
   const { t } = useTranslation();
-  const [active, setActive] = useState('Home');
+  const [active, setActive] = useState('Dashboard');
   const { assets, colors, gradients, sizes } = useTheme();
   const labelColor = colors.text;
 
   const handleNavigation = useCallback(
     (to: any) => {
       setActive(to);
+      // to === 'Dashboard' ? navigation.navigate('Dashboard') :
       navigation.navigate({
         name: ScreenNames.COMMON_STACK as never,
       } as never,
@@ -90,14 +91,46 @@ const DrawerContent = (
 
   // screen list for Drawer menu
   const screens = [
-    { name: ScreenNames.DASHBOARD, to: 'Home', icon: assets.home },
-    { name: t('screens.components'), to: 'Components', icon: assets.components },
-    { name: ScreenNames.RETAIL_SALES, to: 'RetailSales', icon: assets.document },
-    { name: t('screens.rental'), to: 'Pro', icon: assets.rental },
-    { name: t('screens.profile'), to: 'Profile', icon: assets.profile },
-    { name: t('screens.settings'), to: 'Pro', icon: assets.settings },
-    { name: t('screens.register'), to: 'Register', icon: assets.register },
-    { name: t('screens.extra'), to: 'Pro', icon: assets.extras },
+    {
+      name: t('screens.dashboard'),
+      to: ScreenNames.DASHBOARD,
+      icon: assets.home
+    },
+    {
+      name: t('screens.retail-sales'),
+      to: ScreenNames.RETAIL_SALES,
+      icon: assets.components
+    },
+    {
+      name: t('screens.long-term-seasonal-sales'),
+      to: ScreenNames.LONG_TERM_SEASONAL_SALES,
+      icon: assets.document
+    },
+    {
+      name: t('screens.budget'),
+      to: ScreenNames.BUDGET,
+      icon: assets.rental
+    },
+    {
+      name: t('screens.delivery'),
+      to: ScreenNames.DELIVERY,
+      icon: assets.profile
+    },
+    {
+      name: t('screens.settings'),
+      to: ScreenNames.SETTINGS,
+      icon: assets.settings
+    },
+    {
+      name: t('screens.approval'),
+      to: ScreenNames.APPROVAL,
+      icon: assets.register
+    },
+    {
+      name: t('screens.sales-report'),
+      to: ScreenNames.SALES_REPORT,
+      icon: assets.extras
+    },
   ];
 
   return (
@@ -108,23 +141,20 @@ const DrawerContent = (
       renderToHardwareTextureAndroid
       contentContainerStyle={{ paddingBottom: sizes.padding }}>
       <Block paddingHorizontal={sizes.padding}>
-        <Block flex={0} row align="center" marginBottom={sizes.l}>
+
+        <Block flex={0} row align="center" marginBottom={sizes.md}>
           <Image
-            radius={0}
-            width={33}
-            height={33}
-            color={colors.text}
-            source={assets.logo}
-            marginRight={sizes.sm}
+            marginTop={sizes.sm}
+            marginLeft={-5}
+            width={40}
+            height={50}
+            source={require('../assets/images/logo.png')}
           />
-          <Block>
-            <Text size={12} semibold>
-              {t('app.name')}
-            </Text>
-            <Text size={12} semibold>
-              {t('app.native')}
-            </Text>
-          </Block>
+
+          <Text marginTop={14} size={17} bold paddingHorizontal={sizes.s}>
+            {t('app.name')}
+          </Text>
+
         </Block>
 
         {screens?.map((screen, index) => {
@@ -135,6 +165,7 @@ const DrawerContent = (
               justify="flex-start"
               marginBottom={sizes.s}
               key={`menu-screen-${screen.name}-${index}`}
+              // style={{ borderLeftWidth: 4, borderLeftColor: colors.primary, paddingHorizontal: 10 }}
               onPress={() => handleNavigation(screen.to)}>
               <Block
                 flex={0}
@@ -198,7 +229,7 @@ const DrawerContent = (
             />
           </Block>
           <Text p color={labelColor}>
-            {t('menu.started')}
+            {t('navigation.logout')}
           </Text>
         </Button>
 
@@ -221,7 +252,7 @@ export default () => {
           headerShown: false,
           drawerStyle: {
             flex: 1,
-            width: '60%',
+            width: '65%',
             borderRightWidth: 0,
           }
         }}

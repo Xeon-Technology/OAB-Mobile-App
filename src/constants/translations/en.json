@@ -49,21 +49,13 @@
     }
   },
   "app": {
-    "name": "Soft UI",
-    "fullname": "Soft UI Kit",
+    "name": "OAB",
+    "fullname": "OAB Mobile App",
     "native": "React Native",
     "link": "creative-tim.com"
   },
-  "darkMode": "Dark Mode",
-  "screens": {
-    "home": "Home",
-    "components": "Components",
-    "articles": "Articles",
-    "rental": "Rental",
-    "profile": "Profile",
-    "settings": "Settings",
-    "register": "Create account",
-    "extra": "Extra - Automotive"
+  "menu": {
+    "documentation": "Documentation"
   },
   "navigation": {
     "home": "Soft UI",
@@ -81,38 +73,18 @@
     "privacy": "Privacy",
     "register": "Register",
     "login": "Login",
+    "logout": "Logout",
     "extra": "Automotive",
     "shopping": "Shopping Cart"
   },
-  "menu": {
-    "started": "Getting Started",
-    "documentation": "Documentation"
-  },
-  "home": {
-    "title": "Soft UI",
-    "following": "Following",
-    "trending": "Trending"
-  },
-  "register": {
-    "title": "Welcome",
-    "subtitle": "Register with"
-  },
-  "profile": {
-    "title": "Profile",
-    "posts": "Posts",
-    "followers": "Followers",
-    "following": "Following",
-    "aboutMe": "About me"
-  },
-  "pro": {
-    "title": "Soft UI PRO",
-    "alert": "This feature is available in PRO version",
-    "components": "• {{count} Components (Buttons, Inputs, Cards, etc)",
-    "screens": "• {{count} Screens (Shopping, Notifications, Chat, etc)",
-    "support": "• Premium Support included",
-    "takeAdvantage": "Take advantage of all the features and screens coded on React Native for both",
-    "appTemplate": "Soft UI PRO React Native is an innovative app template that will help you built stunning mobile applications in no time. It features a huge number of components and screens built to fit together and look amazing:",
-    "saveTime": "This modern app template will save you a lot of time going from prototyping to full-functional code, because all elements are implemented. We wanted the design process to be seamless, so switching from image to the real page is very easy to do!",
-    "buyNow": "Buy now"
+  "screens": {
+    "dashboard": "Dashboard",
+    "retail-sales": "Retail Sales",
+    "long-term-seasonal-sales": "Long-Term Seasonal Sales",
+    "budget": "Budget",
+    "delivery": "Delivery",
+    "settings": "Settings",
+    "approval": "Approval",
+    "sales-report": "Sales Report"
   }
 }

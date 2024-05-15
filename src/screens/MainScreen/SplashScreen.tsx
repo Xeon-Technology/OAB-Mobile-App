@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { ScreenNames } from '../../constants/types/screen.data';
 import Animated from 'react-native-reanimated';
 import { useTheme } from '../../hooks';
+import { ProgressBar } from 'react-native-paper';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -63,11 +64,11 @@ export default function SplashComp() {
                 showHideTransition={"fade"}
                 hidden
             />
-            <ImageBackground source={require('../../assets/images/splash.png')} resizeMode="cover" style={styles.image}>
+            <ImageBackground source={require('../../../assets/splash.png')} resizeMode="cover" style={styles.image}>
 
-                <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                    <Animated.Image source={require('../../assets/images/logo.png')} style={styles.mainlogo} />
-                </View>
+                {/* <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}> */}
+                {/* <Animated.Image source={require('../../assets/images/logo.png')} style={styles.mainlogo} /> */}
+                {/* </View> */}
 
             </ImageBackground>
         </View>
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     mainlogo: {
-        width: 330,
-        height: 330
+        width: 230,
+        height: 230
     }
 })
