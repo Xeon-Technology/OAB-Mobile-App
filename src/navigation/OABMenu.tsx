@@ -9,6 +9,7 @@ import {
   useDrawerStatus,
   createDrawerNavigator,
   DrawerContentScrollView,
+  DrawerContentOptions,
 } from '@react-navigation/drawer';
 
 import { Block, Text, Button, Image } from '../components';
@@ -66,7 +67,7 @@ const ScreensStack = () => {
 
 /* custom drawer menu */
 const DrawerContent = (
-  props: any,
+  props: DrawerContentComponentProps<DrawerContentOptions>,
 ) => {
   const { navigation } = props;
   const { t } = useTranslation();
@@ -85,6 +86,12 @@ const DrawerContent = (
     },
     [navigation, setActive],
   );
+
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      setActive('Dashboard');
+    });
+  }, [navigation, setActive]);
 
   const handleWebLink = useCallback((url: string) => Linking.openURL(url), []);
 
