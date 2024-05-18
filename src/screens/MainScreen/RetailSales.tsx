@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Block, Button, Input, Text } from '../../components'
 import { SIZES } from '../../constants/light'
 import { CURRENCY, toMoney } from '../../constants/Util'
-import { TextInput } from 'react-native-paper'
+import { Chip, TextInput } from 'react-native-paper'
 
 const GraderOptions = [
     { id: 1, title: 'A-গ্রেড ', isSelected: false },
@@ -64,7 +64,7 @@ const RetailSales = () => {
                     renderItem={({ item, index }) => {
                         return (
                             <View style={styles.cardStyle}>
-                                <Text semibold size={17}>{item.title}</Text>
+                                <Text semibold size={18} padding={3}>{item.title}</Text>
 
                                 <View style={{ flexDirection: "row", gap: 8, marginVertical: 5 }}>
                                     <View style={{ flex: 1, backgroundColor: "#E7EDEF", padding: 6, borderRadius: 6 }}>
@@ -78,18 +78,37 @@ const RetailSales = () => {
                                     </View>
                                 </View>
 
-                                <View style={{ flexDirection: "row", gap: 10, marginTop: 10 }}>
+                                <View style={[styles.chipBtn, { marginBottom: "4%" }]}>
+                                    {
+                                        QtyOptions?.map((item: any, index: number) => (
+                                            <Chip
+                                                key={(index * Math.random()).toString()}
+                                                // textStyle={{ color: selectedGrade?.id === item.id ? "#fff" : "#000", fontSize: 18, fontWeight: "800", textAlign: "center" }}
+                                                // selected={selectedGrade?.id === item.id}
+                                                // selectedColor={"#fff"}
+                                                // style={[styles.chipStyle, { backgroundColor: selectedGrade?.id === item.id ? "#61a5c2" : "#fff" }]}
+                                                onPress={() => { }
+                                                    // dispatch({ type: ActionType.SET_SELECTED_QTY, payload: { id: item.id, name: item.title, amount: item.description } })
+                                                }
+                                            >
+                                                {item.title}
+                                            </Chip>
+                                        ))
+                                    }
+                                </View>
+
+                                <View style={{ flexDirection: "row", gap: 10 }}>
                                     <View style={{ flex: 1 }}>
-                                        <Text semibold size={14} marginBottom={5}>পরিমাণ</Text>
+                                        <Text semibold size={15} marginBottom={5}>পরিমাণ</Text>
                                         <Input placeholder="Quantity" />
                                     </View>
                                     <View style={{ flex: 1 }}>
-                                        <Text semibold size={14} marginBottom={5}>ইউনিট মূল্য </Text>
+                                        <Text semibold size={15} marginBottom={5}>ইউনিট মূল্য </Text>
                                         <Input placeholder="Unit Amount" />
                                     </View>
                                 </View>
 
-                                <View style={{ flexDirection: "row", marginTop: 10, gap: 10 }}>
+                                <View style={{ flexDirection: "row", gap: 10, marginTop: 10 }}>
                                     <View style={{ flex: 1, alignSelf: "center" }}>
                                         <Text semibold size={15}>টোটাল মূল্য =</Text>
                                     </View>
@@ -137,6 +156,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25,
         paddingVertical: 10,
         borderRadius: 8,
+    },
+    chipBtn: {
+        flexDirection: "row",
+        gap: 8,
+        marginTop: 10,
+        flexWrap: "wrap",
     },
     cardStyle: {
         backgroundColor: "#fff",
