@@ -28,7 +28,7 @@ export default function Login() {
                 <Text center bold size={32} paddingTop={sizes.padding}>OAB</Text>
                 <View style={styles.logo}>
                     <Image
-                        source={require('../../assets/images/logo.png')}
+                        source={require('../../assets/images/main_logo.jpeg')}
                         style={{ width: 120, height: 120 }}
                     />
                 </View>

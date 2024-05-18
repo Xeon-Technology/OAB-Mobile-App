@@ -13,7 +13,6 @@ import {
 
 import { Block, Text, Button, Image } from '../components';
 import { useTheme, useTranslation } from '../hooks';
-import CommonStack from './CommonStack';
 import { ScreenNames } from '../constants/types/screen.data';
 import Screens from './Screens';
 
@@ -148,7 +147,7 @@ const DrawerContent = (
             marginLeft={-5}
             width={40}
             height={50}
-            source={require('../assets/images/logo.png')}
+            source={require('../../assets/logo.png')}
           />
 
           <Text marginTop={14} size={17} bold paddingHorizontal={sizes.s}>
