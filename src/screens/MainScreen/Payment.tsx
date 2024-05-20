@@ -7,6 +7,7 @@ import { Chip } from 'react-native-paper';
 import { PaymentOptionsImages, debugPrint, isMediumDevice, isSmallDevice } from '../../utils/sytemUtil';
 import { AntDesign } from '@expo/vector-icons';
 import { useTheme } from '../../hooks';
+import PaymentModal from '../Modal/PaymentModal';
 
 const paymentOptions = [
     { id: 1, title: 'Cash' },
@@ -58,6 +59,7 @@ const Payment = () => {
                 <Input
                     placeholder="টাকার পরিমান লিখুন"
                     onChangeText={(txt) => { }}
+                    keyboardType="number-pad"
                     style={{ marginBottom: "4%" }}
                 />
 
@@ -79,12 +81,16 @@ const Payment = () => {
                     />
                     <Text semibold center size={13} marginBottom={5} color={"gray"}>রশিদের ছবি দিন</Text>
                     {/* {file?.url && !isLoading && */}
-                    <View style={styles.removeIconStyle}>
+                    {/* <View style={styles.removeIconStyle}>
                         <AntDesign name="delete" size={25} color="red" onPress={() => handleRemoveImage()} />
-                    </View>
+                    </View> */}
                     {/* } */}
                 </View>
             </View>
+            <PaymentModal
+                visible={true}
+                onDismiss={() => { }}
+            />
         </View>
     )
 }
