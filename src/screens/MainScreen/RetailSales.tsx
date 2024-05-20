@@ -1,11 +1,11 @@
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { FlatList, StyleSheet, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import { Block, Button, Input, Text } from '../../components'
-import { SIZES } from '../../constants/light'
+import { Input, Text } from '../../components'
 import { CURRENCY, toMoney } from '../../constants/Util'
-import { Chip, TextInput } from 'react-native-paper'
+import { Chip } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import { ScreenNames } from '../../constants/types/screen.data'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const GraderOptions = [
     { id: 1, title: 'A-গ্রেড ', isSelected: false },
@@ -54,7 +54,7 @@ const RetailSales = () => {
                         <Text
                             color={option.isSelected ? "#fff" : "#000"} size={16}
                             semibold
-                            style={[styles.btnStyle, { backgroundColor: option.isSelected ? "#0077b6" : "#fff" }] as any}
+                            style={[styles.btnStyle, { backgroundColor: option.isSelected ? "#056C89" : "#fff" }] as any}
                         >
                             {option.title}
                         </Text>
@@ -140,9 +140,18 @@ const RetailSales = () => {
                     <Text semibold size={16}>মোট টাকা: {CURRENCY} {toMoney(28000)}</Text>
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: "flex-end", marginVertical: 5 }}>
-                    <Button color={"#0077b6"} width={SIZES.base * 15} onPress={() => nav.navigate({ name: ScreenNames.CUSTOMER_INFORMATION } as never)}>
-                        <Text semibold color={'#fff'}>Proceed</Text>
-                    </Button>
+
+                    <TouchableNativeFeedback
+                        background={TouchableNativeFeedback.Ripple("black", false)}
+                        onPress={() => nav.navigate({ name: ScreenNames.CUSTOMER_INFORMATION } as never)}
+                    >
+
+                        <View style={[styles.ProceedBtnStyle, { backgroundColor: '#056C89', borderColor: '#219ebc' }]}>
+                            <MaterialCommunityIcons name="checkbox-multiple-marked-circle-outline" size={22} color="white" />
+                            <Text semibold size={15} white>Proceed</Text>
+                        </View>
+
+                    </TouchableNativeFeedback>
                 </View>
             </View>
         </View >
@@ -182,5 +191,14 @@ const styles = StyleSheet.create({
     },
     footer: {
         flex: 0,
+    },
+    ProceedBtnStyle: {
+        paddingHorizontal: 15,
+        paddingVertical: 8,
+        borderRadius: 6,
+        borderWidth: 1,
+        flexDirection: "row",
+        gap: 6,
+        justifyContent: "center"
     }
 })
