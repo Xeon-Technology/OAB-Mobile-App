@@ -25,7 +25,7 @@ export interface ISpacing
     | 'paddingRight'
     | 'paddingTop'
     | 'paddingBottom'
-  > {}
+  > { }
 
 export type TWeight =
   /** fontWeight: 400 */
@@ -242,6 +242,7 @@ export interface ThemeIcons {
   train: ImageSourcePropType;
   users: ImageSourcePropType;
   warning: ImageSourcePropType;
+  uploader: ImageSourcePropType;
 }
 
 export interface ThemeAssets {
