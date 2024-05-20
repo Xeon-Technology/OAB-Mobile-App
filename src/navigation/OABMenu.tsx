@@ -79,7 +79,7 @@ const DrawerContent = (
   const handleNavigation = useCallback(
     (to: any) => {
       setActive(to);
-      // to === 'Dashboard' ? navigation.navigate('Dashboard') :
+
       navigation.navigate({
         name: ScreenNames.COMMON_STACK as never,
       } as never,
@@ -104,37 +104,44 @@ const DrawerContent = (
       icon: assets.home
     },
     {
-      name: t('screens.retail-sales'),
+      // name: t('screens.retail-sales'),
+      name: 'রিটেল সেল',
       to: ScreenNames.RETAIL_SALES,
       icon: assets.components
     },
     {
-      name: t('screens.long-term-seasonal-sales'),
+      // name: t('screens.long-term-seasonal-sales'),
+      name: 'লং টার্ম সিজনাল সেল',
       to: ScreenNames.LONG_TERM_SEASONAL_SALES,
       icon: assets.document
     },
     {
-      name: t('screens.budget'),
+      // name: t('screens.budget'),
+      name: 'বাজেট',
       to: ScreenNames.BUDGET,
       icon: assets.rental
     },
     {
-      name: t('screens.delivery'),
+      // name: t('screens.delivery'),
+      name: 'ডেলিভারি',
       to: ScreenNames.DELIVERY,
       icon: assets.profile
     },
     {
-      name: t('screens.settings'),
+      // name: t('screens.settings'),
+      name: 'সেটিংস',
       to: ScreenNames.SETTINGS,
       icon: assets.settings
     },
     {
-      name: t('screens.approval'),
+      // name: t('screens.approval'),
+      name: 'অনুমোদন',
       to: ScreenNames.APPROVAL,
       icon: assets.register
     },
     {
-      name: t('screens.sales-report'),
+      // name: t('screens.sales-report'),
+      name: 'সেলস রিপোর্ট',
       to: ScreenNames.SALES_REPORT,
       icon: assets.extras
     },
@@ -191,7 +198,7 @@ const DrawerContent = (
                   color={colors[isActive ? 'white' : 'black']}
                 />
               </Block>
-              <Text paddingHorizontal={sizes.sm} p semibold={isActive} color={labelColor}>
+              <Text paddingHorizontal={sizes.s} p semibold={isActive} color={labelColor}>
                 {screen.name}
               </Text>
             </Button>
