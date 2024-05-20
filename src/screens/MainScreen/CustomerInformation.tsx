@@ -1,10 +1,11 @@
-import { ActivityIndicator, StyleSheet, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, TouchableNativeFeedback, View } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import { Button, Input, Text } from '../../components'
 import { debounce, validPhoneNumberCheck } from '../../utils/sytemUtil'
 import NewCustomerModal from '../Modal/NewCustomerModal'
 import { useNavigation } from '@react-navigation/native'
 import { ScreenNames } from '../../constants/types/screen.data'
+import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 
 const CustomerInformation = () => {
     const [phoneNumber, setPhoneNumber] = useState('')
@@ -44,25 +45,35 @@ const CustomerInformation = () => {
                     {isValidPhoneNumber() && selectedClient === null && !false && <Text danger semibold size={16} paddingTop={6}>এই ফোন নাম্বারে কোনো দোকান খুঁজে পাওয়া যায়নি!</Text>}
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: "flex-end", paddingVertical: 5 }}>
-                    <Button
-                        color={"#0077b6"}
-                        // disabled={!isValid() || submitting}
+
+                    <TouchableNativeFeedback
+                        background={TouchableNativeFeedback.Ripple("black", false)}
                         onPress={() => setToggleNewCustomerModal(true)}
                     >
-                        <Text semibold size={15} white paddingHorizontal={25}>{false ? "Saving..." : "Create"}</Text>
-                    </Button>
-                    <Button
-                        color={"#0077b6"}
-                        // disabled={!isValid() || submitting}
+
+                        <View style={[styles.btnStyle, { backgroundColor: '#056C89', borderColor: '#219ebc' }]}>
+                            <Ionicons name="person-add" size={20} color="white" />
+                            <Text semibold size={15} white>Create</Text>
+                        </View>
+
+                    </TouchableNativeFeedback>
+
+                    <TouchableNativeFeedback
+                        background={TouchableNativeFeedback.Ripple("black", false)}
                         onPress={() => nav.navigate({
                             name: ScreenNames.PAYMENT as never,
                             params: {
                                 total: 28000
                             }
-                        } as never)}
-                    >
-                        <Text semibold size={15} white paddingHorizontal={25}>{false ? "Saving..." : "Payment"}</Text>
-                    </Button>
+                        } as never)}>
+
+                        <View style={[styles.btnStyle, { backgroundColor: '#056C89', borderColor: '#219ebc' }]}>
+                            <MaterialIcons name="payments" size={22} color="white" />
+                            <Text semibold size={15} white>Payment</Text>
+                        </View>
+
+                    </TouchableNativeFeedback>
+
                 </View>
             </View>
             <View style={[styles.cardStyle, { borderRadius: 5, borderWidth: 1, borderColor: "#c4c4c4" }]}>
@@ -123,5 +134,13 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.20,
         shadowRadius: 3.84,
         elevation: 3
+    },
+    btnStyle: {
+        padding: 10,
+        borderRadius: 6,
+        borderWidth: 1,
+        flexDirection: "row",
+        gap: 6,
+        justifyContent: "center"
     }
 })
