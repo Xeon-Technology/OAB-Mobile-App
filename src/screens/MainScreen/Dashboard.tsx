@@ -30,7 +30,7 @@ const Dashboard = () => {
     return (
         <ScrollView>
             {
-                false ? <ActivityIndicator size={'large'} color={'#0077b6'} style={{ marginVertical: 50 }} />
+                false ? <ActivityIndicator size={'large'} color={'#056C89'} style={{ marginVertical: 50 }} />
                     :
                     <View style={styles.container}>
 
