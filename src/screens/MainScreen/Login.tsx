@@ -68,11 +68,11 @@ export default function Login() {
                         value={userLogin.password}
                         onChangeText={(value) => setUserLogin({ ...userLogin, password: value })}
                     />
-                    <Text align='right' semibold color={"#0E927A"} size={13} marginVertical={5}>Forgot Password?</Text>
+                    <Text align='right' semibold color={"#0077b6"} size={13} marginVertical={5}>Forgot Password?</Text>
                 </View>
 
                 <View>
-                    <Button radius={10} color={"#0E927A"} marginHorizontal={20} marginTop={5}
+                    <Button radius={10} color={"#0077b6"} marginHorizontal={20} marginTop={5}
                         onPress={() => handleUserLogin()}>
                         {false ? <ActivityIndicator size={"large"} color={"white"} /> : <Text semibold white size={20}>Login</Text>}
                     </Button>
