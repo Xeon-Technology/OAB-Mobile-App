@@ -1,13 +1,13 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, TouchableNativeFeedback, View } from 'react-native'
 import React, { useState } from 'react'
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { CURRENCY } from '../../constants/Util';
 import { Image, Input, Text } from '../../components';
-import { Chip } from 'react-native-paper';
 import { PaymentOptionsImages, debugPrint, isMediumDevice, isSmallDevice } from '../../utils/sytemUtil';
-import { AntDesign } from '@expo/vector-icons';
 import { useTheme } from '../../hooks';
-import PaymentModal from '../Modal/PaymentModal';
+import PaymentSuccessModal from '../Modal/PaymentSuccessModal';
+import PaymentFailedModal from '../Modal/PaymentFailedModal';
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 const paymentOptions = [
     { id: 1, title: 'Cash' },
@@ -20,8 +20,10 @@ const Payment = () => {
     let params = route.params
     let total = (params as any)['total']
     const { assets } = useTheme();
-
+    const nav = useNavigation();
     const [totalAmount, setTotalAmount] = useState(total)
+    const [showSuccessModal, setShowSuccessModal] = useState(false)
+    const [showFailedModal, setShowFailedModal] = useState(false)
 
     const handleRemoveImage = () => {
 
@@ -38,9 +40,9 @@ const Payment = () => {
                 <View style={[styles.chipBtn, { marginBottom: "4%" }]}>
                     {
                         paymentOptions?.map((item: any, index: number) => (
-                            <>
+                            <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple("#37caec", true)}>
                                 <View key={index} style={{ gap: 5, alignItems: "center" }}>
-                                    <View style={styles.cardStyle}>
+                                    <View style={[styles.cardStyle]}>
                                         <Image
                                             key={index}
                                             source={PaymentOptionsImages(item.title)}
@@ -51,7 +53,7 @@ const Payment = () => {
                                     </View>
                                     <Text semibold size={15} >{item.title}</Text>
                                 </View>
-                            </>
+                            </TouchableNativeFeedback>
                         ))
                     }
                 </View>
@@ -63,34 +65,65 @@ const Payment = () => {
                     style={{ marginBottom: "4%" }}
                 />
 
-                <View style={{ position: "relative", borderStyle: "dashed", borderWidth: 1, borderRadius: 10, marginVertical: 15, marginHorizontal: 65 }}>
-                    {/* {progressLoader !== 100 && <ProgressLoader value={progressLoader} />} */}
-                    <Image
-                        source={assets.uploader}
-                        radius={5}
-                        // onLoadStart={() => handleDokanImgLoading(true)}
-                        // onLoadEnd={() => handleDokanImgLoading(false)}
-                        onError={(error) => {
-                            debugPrint(error)
-                        }}
-                        // onProgress={(e) => setProgressLoader(Math.floor((e?.nativeEvent?.loaded * 100) / e?.nativeEvent?.total))}
-                        shadow
-                        style={{ width: 80, height: 80, alignSelf: "center", marginTop: 10 }}
-                        resizeMode="contain"
-                    // style={{ width: file?.url ? 160 : 140, height: file?.url ? 145 : 140, alignSelf: "center", marginVertical: 10 }}
-                    />
-                    <Text semibold center size={13} marginBottom={5} color={"gray"}>রশিদের ছবি দিন</Text>
-                    {/* {file?.url && !isLoading && */}
-                    {/* <View style={styles.removeIconStyle}>
+                <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple("#37caec", true)}>
+                    <View style={{ position: "relative", borderStyle: "dashed", borderWidth: 1, borderRadius: 10, marginVertical: 15, marginHorizontal: 65 }}>
+                        {/* {progressLoader !== 100 && <ProgressLoader value={progressLoader} />} */}
+                        <Image
+                            source={assets.uploader}
+                            radius={5}
+                            // onLoadStart={() => handleDokanImgLoading(true)}
+                            // onLoadEnd={() => handleDokanImgLoading(false)}
+                            onError={(error) => {
+                                debugPrint(error)
+                            }}
+                            // onProgress={(e) => setProgressLoader(Math.floor((e?.nativeEvent?.loaded * 100) / e?.nativeEvent?.total))}
+                            shadow
+                            style={{ width: 80, height: 80, alignSelf: "center", marginTop: 10 }}
+                            resizeMode="contain"
+                        // style={{ width: file?.url ? 160 : 140, height: file?.url ? 145 : 140, alignSelf: "center", marginVertical: 10 }}
+                        />
+                        <Text semibold center size={13} marginBottom={5} color={"gray"}>রশিদের ছবি দিন</Text>
+                        {/* {file?.url && !isLoading && */}
+                        {/* <View style={styles.removeIconStyle}>
                         <AntDesign name="delete" size={25} color="red" onPress={() => handleRemoveImage()} />
                     </View> */}
-                    {/* } */}
+                        {/* } */}
+                    </View>
+                </TouchableNativeFeedback>
+            </View>
+
+            <View style={{ flexDirection: "row", gap: 10 }}>
+                <View style={{ flex: 1 }}>
+                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple("red", false)} onPress={() => nav.goBack()}>
+                        <View style={[styles.btnStyle, { backgroundColor: '#fff', borderColor: '#dee2e6' }]}>
+                            <MaterialIcons name="cancel" size={22} color="red" />
+                            <Text center semibold size={15}>Cancel</Text>
+                        </View>
+                    </TouchableNativeFeedback>
+                </View>
+
+                <View style={{ flex: 1 }}>
+                    <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple("black", false)} onPress={() => setShowSuccessModal(true)}>
+                        <View style={[styles.btnStyle, { backgroundColor: '#056C89', borderColor: '#2A93D5' }]}>
+                            <Feather name="check-circle" size={22} color="white" />
+                            <Text center semibold white size={15}>Confirm</Text>
+                        </View>
+                    </TouchableNativeFeedback>
                 </View>
             </View>
-            <PaymentModal
-                visible={true}
-                onDismiss={() => { }}
-            />
+            <Text semibold center size={13} marginBottom={5} color={"gray"} onPress={() => setShowFailedModal(true)}>Failed</Text>
+
+            {showSuccessModal &&
+                <PaymentSuccessModal
+                    visible={showSuccessModal}
+                    onDismiss={() => setShowSuccessModal(false)}
+                />}
+
+            {showFailedModal &&
+                <PaymentFailedModal
+                    visible={showFailedModal}
+                    onDismiss={() => setShowFailedModal(false)}
+                />}
         </View>
     )
 }
@@ -133,4 +166,13 @@ const styles = StyleSheet.create({
         padding: 3,
         borderRadius: 8
     },
+    btnStyle: {
+        padding: 10,
+        borderRadius: 6,
+        borderWidth: 1,
+        flexDirection: "row",
+        gap: 6,
+        marginTop: 10,
+        justifyContent: "center"
+    }
 })
