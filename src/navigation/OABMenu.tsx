@@ -3,6 +3,7 @@ import {
   Animated,
   Linking,
   StyleSheet,
+  View,
 } from 'react-native';
 
 import {
@@ -170,7 +171,7 @@ const DrawerContent = (
               row
               justify="flex-start"
               marginBottom={sizes.s}
-              key={`menu-screen-${screen.name}-${index}`}
+              key={`menu-screen-${screen.name}-${index * 3}`}
               // style={{ borderLeftWidth: 4, borderLeftColor: colors.primary, paddingHorizontal: 10 }}
               onPress={() => handleNavigation(screen.to)}>
               <Block
@@ -190,7 +191,7 @@ const DrawerContent = (
                   color={colors[isActive ? 'white' : 'black']}
                 />
               </Block>
-              <Text p semibold={isActive} color={labelColor}>
+              <Text paddingHorizontal={sizes.sm} p semibold={isActive} color={labelColor}>
                 {screen.name}
               </Text>
             </Button>
