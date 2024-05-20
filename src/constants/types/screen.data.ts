@@ -14,6 +14,8 @@ export const ScreenNames = {
     SETTINGS: "Settings",
     APPROVAL: "Approval",
     SALES_REPORT: "SalesReport",
+    CUSTOMER_INFORMATION: "CustomerInformation",
+    PAYMENT: "Payment",
 }
 
 export interface IUserScreen {

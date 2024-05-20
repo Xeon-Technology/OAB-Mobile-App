@@ -4,6 +4,8 @@ import { Block, Button, Input, Text } from '../../components'
 import { SIZES } from '../../constants/light'
 import { CURRENCY, toMoney } from '../../constants/Util'
 import { Chip, TextInput } from 'react-native-paper'
+import { useNavigation } from '@react-navigation/native'
+import { ScreenNames } from '../../constants/types/screen.data'
 
 const GraderOptions = [
     { id: 1, title: 'A-গ্রেড ', isSelected: false },
@@ -33,6 +35,8 @@ const QtyOptions = [
 
 const RetailSales = () => {
     const [gradeOptions, setGradeOptions] = useState(GraderOptions)
+    const [qtyOptions, setQtyOptions] = useState(QtyOptions)
+    const nav = useNavigation();
 
     const handleSelectGrade = (id: number) => {
         const items = [...GraderOptions]
@@ -136,7 +140,7 @@ const RetailSales = () => {
                     <Text semibold size={16}>মোট টাকা: {CURRENCY} {toMoney(28000)}</Text>
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: "flex-end", marginVertical: 5 }}>
-                    <Button color={"#0077b6"} width={SIZES.base * 15} >
+                    <Button color={"#0077b6"} width={SIZES.base * 15} onPress={() => nav.navigate({ name: ScreenNames.CUSTOMER_INFORMATION } as never)}>
                         <Text semibold color={'#fff'}>Proceed</Text>
                     </Button>
                 </View>

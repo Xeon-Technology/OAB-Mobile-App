@@ -1,9 +1,9 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
 import { ScreenNames } from '../constants/types/screen.data';
-import { useScreenOptions } from '../hooks';
 import RetailSales from '../screens/MainScreen/RetailSales';
+import CustomerInformation from '../screens/MainScreen/CustomerInformation';
+import Payment from '../screens/MainScreen/Payment';
 const Stack = createStackNavigator();
 
 const CommonStack = () => {
@@ -15,6 +15,20 @@ const CommonStack = () => {
                 component={RetailSales}
                 options={{
                     title: 'Retail Sales'
+                }}
+            />
+            <Stack.Screen
+                name={ScreenNames.CUSTOMER_INFORMATION}
+                component={CustomerInformation}
+                options={{
+                    title: 'Customer Information'
+                }}
+            />
+            <Stack.Screen
+                name={ScreenNames.PAYMENT}
+                component={Payment}
+                options={{
+                    title: 'Make a Payment'
                 }}
             />
         </Stack.Navigator>
