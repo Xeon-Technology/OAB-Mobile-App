@@ -3,7 +3,6 @@ import { Dimensions } from "react-native";
 import { Alert, Platform, ToastAndroid } from "react-native";
 const isIos = Platform.OS == "ios"
 
-
 export const ShowToast = (msg: string, type: number, toastFinished?: () => void): void => {
     isIos ?
         Alert.alert(type == 1 ? "Success" : "Error", msg)
@@ -100,3 +99,13 @@ export function StringSanitizer(text: string) {
 export const isSmallDevice = Dimensions.get('window').width < 479
 export const isMediumDevice = Dimensions.get('window').width < 767
 export const isLargeDevice = Dimensions.get('window').width < 991
+
+export const PaymentOptionsImages = (img: string) => {
+
+    const paymentImgs: any = {
+        Cash: require("../assets/images/cash-logo.png"),
+        Bkash: require("../assets/images/bkash-logo.png"),
+        Rocket: require("../assets/images/rocket-logo.png"),
+    }
+    return paymentImgs[img]
+}
