@@ -84,7 +84,7 @@ const NewCustomerModal = ({ visible, onDismiss, onSuccess }: INewCustomerModal) 
                     <Button
                         onPress={() => {
                         }}
-                        color={"#0077b6"}
+                        color={"#056C89"}
                         style={{ marginHorizontal: 10, marginBottom: 10 }}
                     >
                         <View style={{ flexDirection: "row", alignItems: "center", }}>
