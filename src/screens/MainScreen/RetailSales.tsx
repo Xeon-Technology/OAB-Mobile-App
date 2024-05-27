@@ -6,6 +6,7 @@ import { Chip } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import { ScreenNames } from '../../constants/types/screen.data'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import SearchBarComp from '../../components/SearchBarComp'
 
 const GraderOptions = [
     { id: 1, title: 'A-গ্রেড ', isSelected: false },
@@ -47,6 +48,7 @@ const RetailSales = () => {
 
     return (
         <View style={styles.mainContainer}>
+            {/* <SearchBarComp /> */}
             <Text semibold size={18}>Select Grade</Text>
             <View style={{ flexDirection: 'row', gap: 10, marginVertical: 10 }}>
                 {GraderOptions.map((option, indx) =>
