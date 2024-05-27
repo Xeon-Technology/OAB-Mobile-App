@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text } from '../../components';
-import { View, StyleSheet, ActivityIndicator, ScrollView, useWindowDimensions } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, ScrollView, useWindowDimensions, Alert } from 'react-native';
 import { BarChart, LineChart, PieChart } from 'react-native-gifted-charts';
-import { debugPrint } from '../../utils/sytemUtil';
 import { toMoney } from '../../constants/Util';
+import { useNavigation } from '@react-navigation/native';
 
 
 const barData = [{ value: 15 }];
@@ -26,6 +26,29 @@ const pieData = [
 
 const Dashboard = () => {
     const { width: screenWidth } = useWindowDimensions();
+    const nav = useNavigation();
+
+    useEffect(
+        () =>
+            nav.addListener('beforeRemove', (e) => {
+                e.preventDefault();
+
+                Alert.alert(
+                    'Discard changes?',
+                    'Are you sure to leave the screen?',
+                    [
+                        { text: "Don't leave", style: 'cancel', onPress: () => { } },
+                        {
+                            text: 'Yes, Leave',
+                            style: 'destructive',
+
+                            onPress: () => nav.dispatch(e.data.action),
+                        },
+                    ]
+                );
+            }),
+        [nav]
+    );
 
     return (
         <ScrollView>

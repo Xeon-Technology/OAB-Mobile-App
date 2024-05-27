@@ -1,6 +1,6 @@
 import i18n from 'i18n-js';
-import {ImageSourcePropType} from 'react-native';
-import {ITheme} from './theme';
+import { ITheme } from './theme';
+import { IAuthData } from '../../core/data/models/AuthData';
 
 export * from './components';
 export * from './theme';
@@ -10,50 +10,9 @@ export interface IUser {
   name?: string;
   department?: string;
   avatar?: string;
-  stats?: {posts?: number; followers?: number; following?: number};
-  social?: {twitter?: string; dribbble?: string};
   about?: string;
 }
 
-export interface ICategory {
-  id?: number;
-  name?: string;
-}
-export interface IArticleOptions {
-  id?: number;
-  title?: string;
-  description?: string;
-  type?: 'room' | 'apartment' | 'house'; // private room | entire apartment | entire house
-  sleeping?: {total?: number; type?: 'sofa' | 'bed'};
-  guests?: number;
-  price?: number;
-  user?: IUser;
-  image?: string;
-}
-export interface IArticle {
-  id?: number;
-  title?: string;
-  description?: string;
-  category?: ICategory;
-  image?: string;
-  location?: ILocation;
-  rating?: number;
-  user?: IUser;
-  offers?: IProduct[];
-  options?: IArticleOptions[];
-  timestamp?: number;
-  onPress?: (event?: any) => void;
-}
-
-export interface IProduct {
-  id?: number;
-  title?: string;
-  description?: string;
-  image?: string;
-  timestamp?: number;
-  linkLabel?: string;
-  type: 'vertical' | 'horizontal';
-}
 export interface ILocation {
   id?: number;
   city?: string;
@@ -68,22 +27,19 @@ export interface IUseData {
   users: IUser[];
   handleUser: (data?: IUser) => void;
   handleUsers: (data?: IUser[]) => void;
-  basket: IBasket;
-  handleBasket: (data?: IBasket) => void;
-  following: IProduct[];
-  setFollowing: (data?: IProduct[]) => void;
-  trending: IProduct[];
-  setTrending: (data?: IProduct[]) => void;
-  categories: ICategory[];
-  setCategories: (data?: ICategory[]) => void;
-  recommendations: IArticle[];
-  setRecommendations: (data?: IArticle[]) => void;
-  articles: IArticle[];
-  setArticles: (data?: IArticle[]) => void;
-  article: IArticle;
-  handleArticle: (data?: IArticle) => void;
-  notifications: INotification[];
   handleNotifications: (data?: INotification[]) => void;
+
+  authData: IAuthData | null;
+  currentUserAccountId: Number | null;
+  currentUserId: Number | null;
+  currentUserAccountName: String | null;
+  currentUserAccountAddress: String | null;
+  currentUser: String | null;
+  handleAuthData: (data?: IAuthData) => void;
+  getAuthData: () => IAuthData,
+  logout: (callback?: () => void) => void;
+  roles: string[]
+
 }
 
 export interface ITranslate {
@@ -91,37 +47,6 @@ export interface ITranslate {
   setLocale: (locale?: string) => void;
   t: (scope?: i18n.Scope, options?: i18n.TranslateOptions) => string;
   translate: (scope?: i18n.Scope, options?: i18n.TranslateOptions) => string;
-}
-export interface IExtra {
-  id?: number;
-  name?: string;
-  time?: string;
-  image: ImageSourcePropType;
-  saved?: boolean;
-  booked?: boolean;
-  available?: boolean;
-  onBook?: () => void;
-  onSave?: () => void;
-  onTimeSelect?: (id?: number) => void;
-}
-
-export interface IBasketItem {
-  id?: number;
-  image?: string;
-  title?: string;
-  description?: string;
-  stock?: boolean;
-  price?: number;
-  qty?: number;
-  qtys?: number[];
-  size?: number | string;
-  sizes?: number[] | string[];
-}
-
-export interface IBasket {
-  subtotal?: number;
-  items?: IBasketItem[];
-  recommendations?: IBasketItem[];
 }
 
 export interface INotification {
@@ -132,11 +57,18 @@ export interface INotification {
   business?: boolean;
   createdAt?: number | Date;
   type:
-    | 'document'
-    | 'documentation'
-    | 'payment'
-    | 'notification'
-    | 'profile'
-    | 'extras'
-    | 'office';
+  | 'document'
+  | 'documentation'
+  | 'payment'
+  | 'notification'
+  | 'profile'
+  | 'extras'
+  | 'office';
+}
+
+export interface AreaType {
+  value: number;
+  label: string;
+  areaTypeId: number;
+  areaType: string;
 }

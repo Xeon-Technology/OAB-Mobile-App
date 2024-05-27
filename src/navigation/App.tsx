@@ -3,9 +3,8 @@ import { Platform, StatusBar } from 'react-native';
 import { useFonts } from 'expo-font';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
-import Menu from './Menu';
-import { useData, ThemeProvider, TranslationProvider } from '../hooks';
 import MainNavigation from './MainNavigation';
+import { ThemeProvider, TranslationProvider, useData } from '../hooks';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();

@@ -1,10 +1,7 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import Storage from '@react-native-async-storage/async-storage';
 
 import {
-  IArticle,
-  ICategory,
-  IProduct,
   IUser,
   IUseData,
   ITheme,
@@ -12,25 +9,26 @@ import {
 
 import {
   USERS,
-  FOLLOWING,
-  TRENDING,
-  CATEGORIES,
-  ARTICLES,
+
 } from '../constants/mocks';
-import {light} from '../constants';
+import { light } from '../constants';
+import { IAuthData } from '../core/data/models/AuthData';
 
 export const DataContext = React.createContext({});
 
-export const DataProvider = ({children}: {children: React.ReactNode}) => {
+export const DataProvider = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDark] = useState(false);
   const [theme, setTheme] = useState<ITheme>(light);
   const [user, setUser] = useState<IUser>(USERS[0]);
   const [users, setUsers] = useState<IUser[]>(USERS);
-  const [following, setFollowing] = useState<IProduct[]>(FOLLOWING);
-  const [trending, setTrending] = useState<IProduct[]>(TRENDING);
-  const [categories, setCategories] = useState<ICategory[]>(CATEGORIES);
-  const [articles, setArticles] = useState<IArticle[]>(ARTICLES);
-  const [article, setArticle] = useState<IArticle>({});
+
+  const [authData, setAuthData] = useState<IAuthData | null>(null);
+  const [currentUserAccountId, setClientId] = useState<Number | null>(null);
+  const [currentUserId, setUserId] = useState<Number | null>(null);
+  const [currentUserAccountName, setClientName] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUserAccountAddress, setClientAddress] = useState<any>(null);
+  const [roles, setRoles] = useState<string[]>([]);
 
   // get isDark mode from storage
   const getIsDark = useCallback(async () => {
@@ -54,12 +52,16 @@ export const DataProvider = ({children}: {children: React.ReactNode}) => {
     [setIsDark],
   );
 
+  const getAuthData = () => {
+    return authData;
+  }
+
   // handle users / profiles
   const handleUsers = useCallback(
     (payload: IUser[]) => {
       // set users / compare if has updated
       if (JSON.stringify(payload) !== JSON.stringify(users)) {
-        setUsers({...users, ...payload});
+        setUsers({ ...users, ...payload });
       }
     },
     [users, setUsers],
@@ -76,17 +78,6 @@ export const DataProvider = ({children}: {children: React.ReactNode}) => {
     [user, setUser],
   );
 
-  // handle Article
-  const handleArticle = useCallback(
-    (payload: IArticle) => {
-      // set article / compare if has updated
-      if (JSON.stringify(payload) !== JSON.stringify(article)) {
-        setArticle(payload);
-      }
-    },
-    [article, setArticle],
-  );
-
   // get initial data for: isDark & language
   useEffect(() => {
     getIsDark();
@@ -97,6 +88,36 @@ export const DataProvider = ({children}: {children: React.ReactNode}) => {
     setTheme(isDark ? light : light);
   }, [isDark]);
 
+  const logout = useCallback((callback?: () => void) => {
+
+    Storage.removeItem("authData");
+    setAuthData(null);
+    setClientId(null)
+    setUserId(null);
+    setClientName(null);
+    setCurrentUser(null);
+    setClientAddress(null);
+    setRoles([]);
+
+    setTimeout(() => callback && callback(), 0);
+  }, [setAuthData, setClientId, setUserId, setClientName, setCurrentUser, setClientAddress]);
+
+  const handleAuthData = useCallback(
+    (payload: IAuthData) => {
+      if (JSON.stringify(payload) !== JSON.stringify(authData)) {
+        Storage.setItem('authData', JSON.stringify(payload));
+        setAuthData(payload);
+        if (payload?.me?.userAccounts[0]?.accountId) setClientId(payload?.me?.userAccounts[0]?.accountId);
+        if (payload?.me) setUserId(payload?.me?.id || null);
+        if (payload?.me) setClientName(payload?.me?.fullName);
+        if (payload?.me) setCurrentUser(payload?.me?.userName);
+        if (payload?.me) setClientAddress(payload?.me?.address);
+        if (payload?.roles) setRoles(payload?.roles || []);
+      }
+    },
+    [authData, setAuthData],
+  );
+
   const contextValue = {
     isDark,
     handleIsDark,
@@ -106,16 +127,17 @@ export const DataProvider = ({children}: {children: React.ReactNode}) => {
     users,
     handleUsers,
     handleUser,
-    following,
-    setFollowing,
-    trending,
-    setTrending,
-    categories,
-    setCategories,
-    articles,
-    setArticles,
-    article,
-    handleArticle,
+    logout,
+    authData,
+    currentUserAccountId,
+    currentUserId,
+    currentUserAccountName,
+    handleAuthData,
+    currentUserAccountAddress,
+    currentUser,
+    getAuthData,
+    roles
+
   };
 
   return (
