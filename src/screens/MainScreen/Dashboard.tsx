@@ -34,27 +34,28 @@ const Dashboard = () => {
                     :
                     <View style={styles.container}>
 
-                        <View style={{ flexDirection: "row", gap: 8 }}>
-                            <View style={styles.cardContainer}>
-                                <Text size={15} semibold style={styles.title} marginBottom={5}>Cash</Text>
-                                <BarChart
-                                    frontColor={'#177AD5'}
-                                    barWidth={30}
-                                    isAnimated
-                                    data={barData}
-                                    width={screenWidth - 120}
-                                    height={200}
-                                />
-                            </View>
-                            <View style={styles.cardContainer}>
-                                <Text size={15} semibold style={styles.title}>Supplier Payment</Text>
+                        {/* <View style={{ flexDirection: "row", gap: 8 }}> */}
+                        <View style={styles.cardContainer}>
+                            <Text size={15} semibold style={styles.title} marginBottom={5}>Cash</Text>
+                            <BarChart
+                                frontColor={'#177AD5'}
+                                barWidth={30}
+                                isAnimated
+                                data={barData}
+                                width={screenWidth - 120}
+                                height={200}
+                            />
+                        </View>
+                        <View style={styles.cardContainer}>
+                            <Text size={15} semibold style={styles.title}>Supplier Payment</Text>
+                            <View style={{ alignItems: 'center' }}>
                                 <PieChart
                                     data={pieData}
                                     donut
                                     isAnimated
                                     animationDuration={2000}
-                                    pieInnerComponentHeight={20}
-                                    pieInnerComponentWidth={20}
+                                    pieInnerComponentHeight={10}
+                                    pieInnerComponentWidth={10}
                                     showText
                                     textColor="black"
                                     radius={110}
@@ -62,46 +63,47 @@ const Dashboard = () => {
                                     focusOnPress
                                     showValuesAsLabels
                                     showTextBackground
-                                    textBackgroundRadius={26}
+                                    textBackgroundRadius={24}
                                 />
                             </View>
                         </View>
+                        {/* </View> */}
 
-                        <View style={{ flexDirection: "row", gap: 8 }}>
-                            <View style={styles.cardContainer}>
-                                <Text size={15} semibold style={styles.title}></Text>
-                                <LineChart
-                                    data={lineData}
-                                    color={'#177AD5'}
-                                    thickness={3}
-                                    dataPointsColor={'red'}
+                        {/* <View style={{ flexDirection: "row", gap: 8 }}> */}
+                        <View style={styles.cardContainer}>
+                            <Text size={15} semibold style={styles.title}></Text>
+                            <LineChart
+                                data={lineData}
+                                color={'#177AD5'}
+                                thickness={3}
+                                dataPointsColor={'red'}
+                                width={screenWidth - 120}
+                                height={200}
+                            />
+                        </View>
+                        <View style={styles.cardContainer}>
+                            <Text size={15} semibold style={styles.title}>Expense</Text>
+                            <View style={{ flex: 1 }}>
+                                <BarChart
+                                    showYAxisIndices
+                                    barWidth={20}
+                                    barBorderRadius={4}
+                                    frontColor="lightgray"
+                                    activeOpacity={0.2}
+                                    showFractionalValues
+                                    noOfSections={4}
+                                    maxValue={400}
+                                    data={barChartData}
+                                    isAnimated
+                                    showLine
+                                    scrollAnimation
+                                    showValuesAsTopLabel
                                     width={screenWidth - 120}
                                     height={200}
                                 />
                             </View>
-                            <View style={styles.cardContainer}>
-                                <Text size={15} semibold style={styles.title}>Expense</Text>
-                                <View style={{ flex: 1 }}>
-                                    <BarChart
-                                        showYAxisIndices
-                                        barWidth={20}
-                                        barBorderRadius={4}
-                                        frontColor="lightgray"
-                                        activeOpacity={0.2}
-                                        showFractionalValues
-                                        noOfSections={4}
-                                        maxValue={400}
-                                        data={barChartData}
-                                        isAnimated
-                                        showLine
-                                        scrollAnimation
-                                        showValuesAsTopLabel
-                                        width={screenWidth - 120}
-                                        height={200}
-                                    />
-                                </View>
-                            </View>
                         </View>
+                        {/* </View> */}
 
                         <View style={styles.cardContainer}>
                             <Text size={15} semibold style={styles.title}>Burner Fire Status</Text>
