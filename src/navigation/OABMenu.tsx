@@ -79,6 +79,7 @@ const DrawerContent = (
   const handleNavigation = useCallback(
     (to: any) => {
       setActive(to);
+      if (to === 'Dashboard') return;
 
       navigation.navigate({
         name: ScreenNames.COMMON_STACK as never,
