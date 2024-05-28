@@ -19,9 +19,11 @@ const Payment = () => {
     const route = useRoute();
     let params = route.params
     let total = (params as any)['total']
+    let accId = (params as any)['accountId']
     const { assets } = useTheme();
     const nav = useNavigation();
     const [totalAmount, setTotalAmount] = useState(total)
+    const [clientId, setClientId] = useState(accId)
     const [showSuccessModal, setShowSuccessModal] = useState(false)
     const [showFailedModal, setShowFailedModal] = useState(false)
 

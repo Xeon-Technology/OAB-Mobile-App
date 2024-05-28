@@ -33,7 +33,7 @@ const ScreensStack = () => {
 
   const borderRadius = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 16],
+    outputRange: [0, 1],
   });
 
   const animatedStyle = {

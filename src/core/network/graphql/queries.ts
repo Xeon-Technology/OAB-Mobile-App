@@ -134,3 +134,32 @@ query($phone: String!, $forDokan: Boolean, $parentId: Int) {
     }
   }
 }`;
+
+export const CREATE_CLIENT_MUTATION = gql`
+mutation($account: AccountInput!, $extra: AccountExtraParamsInput) {
+  account {
+    addorUpdate(account: $account, accountExtra: $extra) {
+      success
+      data {
+        id
+        name
+        contact {
+          number
+          place
+          email
+        }
+      }
+    }
+  }
+}`;
+
+export const CLIENT_QUERY = gql`
+query($query: QueryParams!) {
+  accountQuery {
+    accounts(query: $query) {
+      id
+      willHaveChild
+      name
+    }
+  }
+}`;

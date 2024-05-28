@@ -1,7 +1,7 @@
 import { ActivityIndicator, StyleSheet, TouchableNativeFeedback, View } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Input, Text } from '../../components'
-import { debounce, debugPrint, parseAddress, validPhoneNumberCheck } from '../../utils/sytemUtil'
+import { debounce, parseAddress, validPhoneNumberCheck } from '../../utils/sytemUtil'
 import NewCustomerModal from '../Modal/NewCustomerModal'
 import { useNavigation } from '@react-navigation/native'
 import { ScreenNames } from '../../constants/types/screen.data'
@@ -12,21 +12,19 @@ import { IAccount } from '../../constants/types'
 import { COLORS } from '../../constants/light'
 
 const CustomerInformation = () => {
-    const [phoneNumber, setPhoneNumber] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState<string>('')
     const [selectedClient, setSelectedClient] = useState<IAccount | null>(null)
     const [toggleNewCustomerModal, setToggleNewCustomerModal] = useState<boolean>(false)
     const nav = useNavigation();
 
     useEffect(() => {
-        if (isValidPhoneNumber()) {
+        isValidPhoneNumber() &&
             loadAccPhoneNo({
                 variables: {
-                    phone: String(phoneNumber),
+                    phone: phoneNumber,
                 }
             })
-        } else {
-            setSelectedClient(null)
-        }
+
     }, [phoneNumber])
 
     const handlePhoneNumber = (txt: string) => {
@@ -94,7 +92,8 @@ const CustomerInformation = () => {
                             onPress={() => nav.navigate({
                                 name: ScreenNames.PAYMENT as never,
                                 params: {
-                                    total: 28000
+                                    total: 28000,
+                                    accountId: selectedClient?.id
                                 }
                             } as never)}>
 
@@ -134,7 +133,13 @@ const CustomerInformation = () => {
                 <NewCustomerModal
                     visible={toggleNewCustomerModal}
                     onDismiss={() => setToggleNewCustomerModal(false)}
-                    onSuccess={() => { }}
+                    onSuccess={(phone: string) => {
+                        loadAccPhoneNo({
+                            variables: {
+                                phone: phone,
+                            }
+                        })
+                    }}
                     phoneNumber={phoneNumber}
                 />
             }
