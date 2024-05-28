@@ -32,7 +32,7 @@ const CustomerInformation = () => {
     const handlePhoneNumber = (txt: string) => {
         setPhoneNumber(txt)
     }
-    const searchPhoneNumber = useCallback(debounce(handlePhoneNumber, 1000), [])
+    const searchPhoneNumber = useCallback(debounce(handlePhoneNumber, 500), [])
 
     const isValidPhoneNumber = () => {
         return validPhoneNumberCheck(phoneNumber?.toString().trim())
@@ -108,7 +108,7 @@ const CustomerInformation = () => {
 
                 </View>
             </View>
-            {accountLoading ? <ActivityIndicator size={35} color={"#056C89"} style={{ marginVertical: 5 }} /> :
+            {accountLoading ? <ActivityIndicator size={35} color={"#056C89"} style={{ marginVertical: 10 }} /> :
                 selectedClient &&
                 <View style={[styles.cardStyle, { borderRadius: 5, borderWidth: 1, borderColor: "#c4c4c4" }]}>
                     <View style={{ flexDirection: "row" }}>
