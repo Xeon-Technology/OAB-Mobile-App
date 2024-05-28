@@ -109,3 +109,20 @@ export const PaymentOptionsImages = (img: string) => {
     }
     return paymentImgs[img]
 }
+
+export const parseAddress = (address: string) => {
+    if (address?.startsWith('{') && address?.endsWith('}')) {
+        let a = JSON.parse(address)
+        const holding = a?.holding ? `${a?.holding}, ` : "";
+        const road = a?.road ? `${a?.road}` : "";
+        // const addrs = a?.address ? `, ${a?.address}` : "";
+        const thana = a?.thana ? `, ${a?.thana}` : "";
+        const subDistrict = a?.subDistrict ? `, ${a?.subDistrict}` : "";
+        const district = a?.district ? `, ${a?.district}` : "";
+        const division = a?.division ? `, ${a?.division}` : "";
+
+        return `Holding-${holding}Road-${road}${thana}${subDistrict}${district}${division}`;
+    } else {
+        return address
+    }
+}

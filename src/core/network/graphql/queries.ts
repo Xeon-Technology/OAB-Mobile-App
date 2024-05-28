@@ -103,3 +103,34 @@ query($request: GetBulkCRMContacts!) {
     }
   }
 }`;
+
+export const ACCOUNT_BY_PHONE_NUMBER = gql`
+query($phone: String!, $forDokan: Boolean, $parentId: Int) {
+  query: accountQuery {
+    result: accountByPhoneNumber(phoneNumber: $phone, forDokan: $forDokan, parentId: $parentId) {
+      id
+      name
+      code
+      createDate
+      createdUser {
+        id
+        fullName
+      }
+      assets {
+        id
+        title
+        type
+        fileName
+      }
+      contact {
+        person
+        place
+        type
+        number
+        number2
+        number3
+        notes
+      }
+    }
+  }
+}`;

@@ -13,6 +13,27 @@ export interface IUser {
   about?: string;
 }
 
+export interface IAccount {
+  id: number;
+  name: string;
+  code: string;
+  createDate: string;
+  createdUser: {
+    id: number;
+    fullName: string;
+  },
+  assets: [],
+  contact: {
+    person: string;
+    place: string;
+    type: string;
+    number: string;
+    number2: string;
+    number3: string;
+    notes: null
+  }
+}
+
 export interface ILocation {
   id?: number;
   city?: string;
